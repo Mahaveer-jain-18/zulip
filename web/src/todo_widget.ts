@@ -424,14 +424,8 @@ export function activate({
             e.stopPropagation();
 
             if (e.key === "Enter") {
-                e.preventDefault();
-
-             // Move focus to the first task input instead of submitting
-               const firstTaskInput = $elem.find("input.add-task").first();
-               if (firstTaskInput.length) {
-                    firstTaskInput.trigger("focus");
-               }
-               return;
+                submit_task_list_title();
+                return;
             }
 
             if (e.key === "Escape") {
