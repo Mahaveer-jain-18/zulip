@@ -424,8 +424,14 @@ export function activate({
             e.stopPropagation();
 
             if (e.key === "Enter") {
-                submit_task_list_title();
-                return;
+                e.preventDefault();
+
+             // Move focus to the first task input instead of submitting
+               const firstTaskInput = $elem.find("input.add-task").first();
+               if (firstTaskInput.length) {
+                    firstTaskInput.trigger("focus");
+               }
+               return;
             }
 
             if (e.key === "Escape") {

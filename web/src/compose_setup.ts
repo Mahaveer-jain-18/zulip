@@ -546,7 +546,24 @@ export function initialize(): void {
                 },
                 on_show() {
                     setTimeout(() => {
-                        $("#todo-title-input").trigger("select");
+                        const $modal = $("#add-todo-modal");
+
+                        // Focus and select the title input when modal opens
+                        const $titleInput = $modal.find("#todo-title-input");
+                        $titleInput.trigger("select");
+
+                        // When pressing Enter in the title input, move focus to first task field
+                        $titleInput.on("keydown", (e) => {
+                            if (e.key === "Enter") {
+                                e.preventDefault();
+
+                                // Focus the first "New task" input instead of submitting
+                                const $firstTaskInput = $modal.find(".todo-input").first();
+                                if ($firstTaskInput.length) {
+                                    $firstTaskInput.trigger("focus");
+                                }
+                            }
+                        });
                     }, 0);
                 },
                 form_id: "add-todo-form",
